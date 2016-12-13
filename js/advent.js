@@ -1,19 +1,32 @@
-/* only let door open if it's today's date */
-function printnum(x){
- var today = Date()
- var day = today.substring(7,10)
- var daytoday = day - 8
- var doornumhtml = x.children[0].innerHTML
- var doornum = doornumhtml.substring(8,10)
- console.log(doornum)
- if (parseInt(doornum) == 2) {
-   x.children[2].style.background = "url('http://i.giphy.com/HHrzy4JepQbL2.gif')";
-   x.children[2].style.backgroundSize = "12em 12em";
- }
- else {
-   x.children[2].style.background = "url('./notyet2.png')";
-   x.children[2].style.backgroundSize = "12em 12em";
- }
+function setbackgrounds() {
+  var formattedDay = moment().format('dddd, Do MMMM YYYY');
+  document.getElementById("demo").innerHTML = "Ho ho ho! Today is " + formattedDay + ".";
+  var today = Date().substring(7,10);
+  generateAllArticleElements(today);
+}
+
+function generateAllArticleElements(today) {
+  for(i=1;i<25; i++) {
+    var article = document.createElement("article");
+    article.id = i;
+    if(i <= today) {
+      makeArticleWithGiphy(article, i);
+    }
+    else {
+      makeMysteryArticle(article, i);
+    }
+    document.getElementById("main").appendChild(article);
+  }
+}
+
+function makeArticleWithGiphy(article, i) {
+  article.innerHTML = '<div class="box"><h2>' + i + '<br/>dec</h2></div><div class="present"><div></div></div>';
+  article.children[1].style.background = backgroundGifs[i];
+  article.children[1].style.backgroundSize = "12em 12em";
+}
+
+function makeMysteryArticle(article, i) {
+  article.innerHTML = '<div class="box"><h2>' + i + '<br/>dec</h2></div><div class="present"><div class="bauble">?</div></div>';
 }
 
 var backgroundGifs =
@@ -43,40 +56,3 @@ var backgroundGifs =
  "url('http://i.giphy.com/3oz8xHK8npq52fjH8c.gif')",
  "url('http://i.giphy.com/6tgOZxok7PSCs.gif')",
 ]
-
-function setbackgrounds(){
- var today = Date()
- var day = today.substring(7,10)
- console.log("day: " + day);
- // var daytoday = day - 26
- document.getElementById("demo").innerHTML = today;
- for(i=1;i<25; i++){
-   /*if date <= current date do this*/
-   /* if the current date is equal to or greater than the date, show the image    */
-   if(day >= i) {
-     var article = document.createElement("article");
-     article.id = i;
-     console.log(article);
-     article.innerHTML = '<div class="box"><h2>' + i + '<br/>dec</h2></div><div class="present"><div class="bauble">?</div></div>';
-     document.body.appendChild(article);
-    //  var door = document.getElementById((i).toString());
-    //  console.log("door: " + door);
-    //  console.log(door.children[0]);
-     article.children[1].style.background = backgroundGifs[i];
-     article.children[1].style.backgroundSize = "12em 12em";
-     /*set z val of bauble to -1 */
-
-   }
-  }
-  /*else set background to black */
-  // append the snow to this element (by ID or direct DOM node reference)
-  snowStorm.targetElement = 'snow-target';
-  //snowStorm.flakesMaxActive = 96;    // show more snow on screen at once
-  //snowStorm.useTwinkleEffect = true;
-  // for(var i=1;i<25; i++){
-  //   var article = document.createElement("article");
-  //   article.id = i;
-  //   console.log(article);
-  //   document.body.appendChild(article);
-
-  }
