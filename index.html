@@ -9,46 +9,97 @@
   
       <link rel="stylesheet" href="css/style.css">
 
+  
   <script src="js/snowstorm-min.js"></script>
   <script type="text/javascript">
 
+ /* only let door open if it's today's date */
+  function printnum(x){
+  var today = Date()
+  var day = today.substring(7,10)
+  var daytoday = day - 8
+  var doornumhtml = x.children[0].innerHTML
+  var doornum = doornumhtml.substring(8,10)
+  console.log(doornum)
+  if (parseInt(doornum) == 2) {
+      x.children[2].style.background = "url('http://i.giphy.com/HHrzy4JepQbL2.gif')";
+       x.children[2].style.backgroundSize = "12em 12em";
+      }
+   else {
+        x.children[2].style.background = "url('./notyet2.png')";
+             x.children[2].style.backgroundSize = "12em 12em";
+
+   }
+}
+
+var backgroundGifs = ["url('http://i.giphy.com/HHrzy4JepQbL2.gif')",
+"url('http://i.giphy.com/Bm2qMzWeqHW2k.gif')",
+"url('http://i.giphy.com/2fspIhJjn48Ok.gif')"
+]
+
+function setbackgrounds(){
+var today = Date()
+var day = today.substring(7,10)
+var daytoday = day - 26	
+for(i=0;i<25; i++){
+	/*if date <= current date do this*/
+	var door = document.getElementById((i+1).toString());
+	console.log(door.children[0]);
+	door.children[1].style.background = backgroundGifs[i];
+	door.children[1].style.backgroundSize = "12em 12em";
+	/*set z val of bauble to -1 */
+	}
+	/*else set background to black */
+}
+ 
 
 
 // append the snow to this element (by ID or direct DOM node reference)
 snowStorm.targetElement = 'snow-target';
-
+//snowStorm.flakesMaxActive = 96;    // show more snow on screen at once
+//snowStorm.useTwinkleEffect = true; 
 </script>
 </head>
 
-<body>
+<body onload="setbackgrounds()">
   <main>
   <img src="images/dojo-logo.png"/>
 	<h1>CSS advent calendar</h1>
-	<article>
-		<div class="box">
+
+	<p id="demo">Date is</p>
+
+	<p id="boxover">  </p>
+
+	<article id = "1" >
+		<div class="box" >
 			<h2>1 <br/> dec</h2>
 		</div>
 		<div class="present">
-			<a href="https://media2.giphy.com/media/K9yDvtLRQvMhW/200.gif#2"><div class="bauble">click here</div></a>
+		<!-- //	<div class="bauble">?</div> -->
 		</div> 
-	</article>
-	<article>
-		<div class="box">
+	</article >
+
+	<article id = "2">
+		<div class="box" >
 			<h2>2<br/> dec</h2>
 		</div>
 		<div class="present" id="snow-target">
-			<div class="bauble">Snow</div>
+			<!-- <div class="bauble">Snow</div> -->
 		</div> 
-	</article>
-	<article>
-		<div class="box">
+	</article >
+
+
+	<article id = "3">
+		<div class="box" >
 			<h2>3 <br/>dec</h2>
 		</div>
-		<div class="present">
-			<div class="bauble">?</div>
+		<div class="present"> 
+			<!-- <div class="bauble">?</div> -->
 		</div> 
+	</div> 
+
 	</article>
-	<article>
+	<article >
 		<div class="box">
 			<h2>4 <br/>dec</h2>
 		</div>
@@ -219,6 +270,15 @@ snowStorm.targetElement = 'snow-target';
 
 	</main>
   
-  
+  <script type="text/javascript">
+  /*print date - 28 at top of page */
+  var today = Date()
+  var day = today.substring(7,10)
+  var daytoday = day - 8
+  document.getElementById("demo").innerHTML = daytoday;
+
+
+
+</script>
 </body>
 </html>
