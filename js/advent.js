@@ -30,7 +30,7 @@ function makeMysteryArticle(article, i) {
 }
 
 var backgroundGifs =
-[
+["day zero",
  "url('http://i.giphy.com/HHrzy4JepQbL2.gif')",
  "url('http://i.giphy.com/Bm2qMzWeqHW2k.gif')",
  "url('http://i.giphy.com/2fspIhJjn48Ok.gif')",
